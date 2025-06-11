@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff6b6b, #feca57);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Landing Page */
+        .hero {
+            text-align: center;
+            padding: 6rem 0;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffeaa7, #fab1a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Auth Forms */
+        .auth-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .auth-form {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 3rem;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .auth-form h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: white;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-group input::placeholder, .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Dashboard */
+        .dashboard {
+            padding: 2rem 0;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .dashboard-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .essay-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .essay-type-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .essay-type-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .essay-type-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        /* Essay Generator */
+        .generator-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .generator-form {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .generator-form h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .generated-essay {
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+            line-height: 1.8;
+            display: none;
+        }
+
+        .generated-essay h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .loading {
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            display: none;
+        }
+
+        .loading-spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 3px solid white;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-content {
+                padding: 1rem;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-content">
+            <a href="#" class="logo" onclick="showPage('landing')">EssayGenius AI</a>
+            <div class="nav-buttons">
+                <a href="#" class="btn btn-secondary" onclick="showPage('login')" id="loginBtn">Login</a>
+                <a href="#" class="btn btn-primary" onclick="showPage('signup')" id="signupBtn">Sign Up</a>
+                <a href="#" class="btn btn-secondary" onclick="logout()" id="logoutBtn" style="display: none;">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Landing Page -->
+    <div id="landing" class="page active">
+        <div class="container">
+            <div class="hero fade-in-up">
+                <h1>Write Perfect Essays with AI</h1>
+                <p>Transform your ideas into compelling essays with our advanced AI writing assistant. From academic papers to creative writing, we've got you covered.</p>
+                <a href="#" class="btn btn-primary" onclick="showPage('signup')">Get Started Free</a>
+            </div>
+
+            <div class="features">
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">📝</div>
+                    <h3>Multiple Essay Types</h3>
+                    <p>Generate argumentative, narrative, descriptive, expository, and creative essays tailored to your needs.</p>
+                </div>
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Get high-quality essays in seconds, not hours. Perfect for tight deadlines and last-minute assignments.</p>
+                </div>
+                <div class="feature-card fade-in-up">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Customizable</h3>
+                    <p>Set word count, academic level, tone, and style to match your specific requirements perfectly.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign Up Page -->
+    <div id="signup" class="page">
+        <div class="auth-container">
+            <form class="auth-form fade-in-up" onsubmit="handleSignup(event)">
+                <h2>Join EssayGenius AI</h2>
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Create a password" required>
+                </div>
+                <div class="form-group">
+                    <label>Academic Level</label>
+                    <select required>
+                        <option value="">Select your level</option>
+                        <option value="high-school">High School</option>
+                        <option value="college">College</option>
+                        <option value="university">University</option>
+                        <option value="graduate">Graduate</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Create Account</button>
+                <p style="text-align: center; margin-top: 1rem; color: rgba(255,255,255,0.8);">
+                    Already have an account? <a href="#" onclick="showPage('login')" style="color: #feca57;">Login here</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Login Page -->
+    <div id="login" class="page">
+        <div class="auth-container">
+            <form class="auth-form fade-in-up" onsubmit="handleLogin(event)">
+                <h2>Welcome Back</h2>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Login</button>
+                <p style="text-align: center; margin-top: 1rem; color: rgba(255,255,255,0.8);">
+                    Don't have an account? <a href="#" onclick="showPage('signup')" style="color: #feca57;">Sign up here</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="page">
+        <div class="container">
+            <div class="dashboard">
+                <div class="dashboard-header fade-in-up">
+                    <h1>Choose Your Essay Type</h1>
+                    <p>Select the type of essay you'd like to generate</p>
+                </div>
+
+                <div class="essay-types">
+                    <div class="essay-type-card fade-in-up" onclick="selectEssayType('argumentative')">
+                        <h3>🎯 Argumentative Essay</h3>
+                        <p>Present and defend a position on a controversial topic with evidence and reasoning.</p>
+                    </div>
+                    <div class="essay-type-card fade-in-up" onclick="selectEssayType('narrative')">
+                        <h3>📖 Narrative Essay</h3>
+                        <p>Tell a compelling story with characters, plot, and personal experiences.</p>
+                    </div>
+                    <div class="essay-type-card fade-in-up" onclick="selectEssayType('descriptive')">
+                        <h3>🎨 Descriptive Essay</h3>
+                        <p>Paint vivid pictures with words, describing people, places, or experiences.</p>
+                    </div>
+                    <div class="essay-type-card fade-in-up" onclick="selectEssayType('expository')">
+                        <h3>📚 Expository Essay</h3>
+                        <p>Explain, inform, or describe a topic with facts and examples.</p>
+                    </div>
+                    <div class="essay-type-card fade-in-up" onclick="selectEssayType('persuasive')">
+                        <h3>💡 Persuasive Essay</h3>
+                        <p>Convince readers to adopt your viewpoint using logical arguments.</p>
+                    </div>
+                    <div class="essay-type-card fade-in-up" onclick="selectEssayType('creative')">
+                        <h3>✨ Creative Essay</h3>
+                        <p>Express creativity through imaginative and artistic writing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Essay Generator -->
+    <div id="generator" class="page">
+        <div class="container">
+            <div class="generator-container">
+                <form class="generator-form fade-in-up" onsubmit="generateEssay(event)">
+                    <h2 id="generatorTitle">Generate Your Essay</h2>
+                    
+                    <div class="form-group">
+                        <label>Essay Topic/Title</label>
+                        <input type="text" id="essayTopic" placeholder="Enter your essay topic" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Word Count</label>
+                            <select id="wordCount" required>
+                                <option value="300">300 words</option>
+                                <option value="500" selected>500 words</option>
+                                <option value="750">750 words</option>
+                                <option value="1000">1000 words</option>
+                                <option value="1500">1500 words</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Academic Level</label>
+                            <select id="academicLevel" required>
+                                <option value="high-school">High School</option>
+                                <option value="college" selected>College</option>
+                                <option value="university">University</option>
+                                <option value="graduate">Graduate</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Writing Style</label>
+                            <select id="writingStyle" required>
+                                <option value="formal" selected>Formal</option>
+                                <option value="informal">Informal</option>
+                                <option value="academic">Academic</option>
+                                <option value="conversational">Conversational</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Tone</label>
+                            <select id="tone" required>
+                                <option value="neutral" selected>Neutral</option>
+                                <option value="persuasive">Persuasive</option>
+                                <option value="analytical">Analytical</option>
+                                <option value="critical">Critical</option>
+                                <option value="supportive">Supportive</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Additional Instructions (Optional)</label>
+                        <textarea id="instructions" rows="4" placeholder="Any specific requirements, sources to include, or particular aspects to focus on..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Generate Essay</button>
+                    <button type="button" class="btn btn-secondary" onclick="showPage('dashboard')" style="width: 100%; margin-top: 0.5rem;">Back to Dashboard</button>
+                </form>
+
+                <div class="loading" id="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Generating your essay... This may take a few moments.</p>
+                </div>
+
+                <div class="generated-essay" id="generatedEssay">
+                    <h3 id="essayTitle"></h3>
+                    <div id="essayContent"></div>
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button class="btn btn-primary" onclick="copyEssay()">Copy Essay</button>
+                        <button class="btn btn-secondary" onclick="generateAnother()">Generate Another</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global state
+        let currentUser = null;
+        let selectedEssayType = '';
+
+        // Page navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update navigation buttons
+            updateNavigation();
+        }
+
+        function updateNavigation() {
+            const loginBtn = document.getElementById('loginBtn');
+            const signupBtn = document.getElementById('signupBtn');
+            const logoutBtn = document.getElementById('logoutBtn');
+            
+            if (currentUser) {
+                loginBtn.style.display = 'none';
+                signupBtn.style.display = 'none';
+                logoutBtn.style.display = 'inline-block';
+            } else {
+                loginBtn.style.display = 'inline-block';
+                signupBtn.style.display = 'inline-block';
+                logoutBtn.style.display = 'none';
+            }
+        }
+
+        // Authentication
+        function handleSignup(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            
+            // Simulate account creation
+            setTimeout(() => {
+                currentUser = {
+                    name: event.target[0].value,
+                    email: event.target[1].value
+                };
+                
+                alert('Account created successfully! Welcome to EssayGenius AI.');
+                showPage('dashboard');
+            }, 1000);
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            // Simulate login
+            setTimeout(() => {
+                currentUser = {
+                    name: 'User',
+                    email: event.target[0].value
+                };
+                
+                alert('Login successful! Welcome back.');
+                showPage('dashboard');
+            }, 1000);
+        }
+
+        function logout() {
+            currentUser = null;
+            showPage('landing');
+            alert('You have been logged out successfully.');
+        }
+
+        // Essay type selection
+        function selectEssayType(type) {
+            selectedEssayType = type;
+            document.getElementById('generatorTitle').textContent = `Generate ${type.charAt(0).toUpperCase() + type.slice(1)} Essay`;
+            showPage('generator');
+        }
+
+        // Essay generation
+        function generateEssay(event) {
+            event.preventDefault();
+            
+            const topic = document.getElementById('essayTopic').value;
+            const wordCount = document.getElementById('wordCount').value;
+            const academicLevel = document.getElementById('academicLevel').value;
+            const writingStyle = document.getElementById('writingStyle').value;
+            const tone = document.getElementById('tone').value;
+            const instructions = document.getElementById('instructions').value;
+
+            // Show loading
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('generatedEssay').style.display = 'none';
+
+            // Simulate essay generation
+            setTimeout(() => {
+                const essay = generateSampleEssay(topic, selectedEssayType, wordCount);
+                
+                document.getElementById('essayTitle').textContent = topic;
+                document.getElementById('essayContent').innerHTML = essay;
+                
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('generatedEssay').style.display = 'block';
+                
+                // Scroll to essay
+                document.getElementById('generatedEssay').scrollIntoView({ behavior: 'smooth' });
+            }, 3000);
+        }
+
+        // Generate sample essay content
+        function generateSampleEssay(topic, type, wordCount) {
+            const introductions = {
+                argumentative: `In today's complex world, the topic of "${topic}" has sparked considerable debate among scholars, policymakers, and the general public. This essay will present a compelling argument that addresses the various facets of this important issue.`,
+                narrative: `The story I'm about to tell you about "${topic}" is one that has shaped my understanding of life in ways I never expected. It begins on what seemed like an ordinary day, but would prove to be anything but ordinary.`,
+                descriptive: `When attempting to capture the essence of "${topic}" in words, one must paint a vivid picture that engages all the senses and transports the reader into the very heart of the subject matter.`,
+                expository: `Understanding "${topic}" requires a comprehensive examination of its various components, historical context, and contemporary relevance. This essay will provide a thorough analysis of this important subject.`,
+                persuasive: `The time has come for us to seriously consider the implications of "${topic}" and take decisive action. Through compelling evidence and logical reasoning, this essay will demonstrate why this issue demands our immediate attention.`,
+                creative: `Imagine a world where "${topic}" takes on a life of its own, where the boundaries between reality and possibility blur, and where creativity knows no limits. This is the story that unfolds before us.`
+            };
+
+            const bodyParagraphs = [
+                `The first major aspect to consider is the historical foundation that has led us to our current understanding. Research has consistently shown that multiple factors contribute to this phenomenon, each playing a crucial role in shaping the overall narrative. Experts in the field have noted that the complexity of this issue requires a multifaceted approach to fully comprehend its implications.`,
+                
+                `Furthermore, contemporary analysis reveals several key trends that cannot be ignored. Statistical data from reputable sources demonstrates clear patterns that support the central thesis of this discussion. The evidence overwhelmingly suggests that careful consideration of all variables is essential for reaching meaningful conclusions.`,
+                
+                `Additionally, the practical applications of this knowledge extend far beyond theoretical understanding. Real-world examples from various contexts illustrate how these principles manifest in everyday situations. Case studies from different regions and demographics provide valuable insights that enrich our comprehension of the subject matter.`
+            ];
+
+            const conclusion = `In conclusion, the examination of "${topic}" reveals a complex tapestry of interconnected elements that demand careful consideration and thoughtful analysis. The evidence presented throughout this essay demonstrates the importance of maintaining a balanced perspective while recognizing the significance of this issue in our contemporary world. Moving forward, it is essential that we continue to engage with these ideas critically and constructively, ensuring that our understanding evolves with new discoveries and changing circumstances. Only through such dedicated inquiry can we hope to address the challenges and opportunities that lie ahead.`;
+
+            let essay = `<p><strong>Introduction</strong></p><p>${introductions[type] || introductions.expository}</p>`;
+            
+            essay += `<p><strong>Body</strong></p>`;
+            bodyParagraphs.forEach((paragraph, index) => {
+                essay += `<p>${paragraph}</p>`;
+            });
+            
+            essay += `<p><strong>Conclusion</strong></p><p>${conclusion}</p>`;
+            
+            essay += `<p><em>Word Count: Approximately ${wordCount} words</em></p>`;
+            
+            return essay;
+        }
+
+        // Utility functions
+        function copyEssay() {
+            const essayContent = document.getElementById('essayContent').innerText;
+            const essayTitle = document.getElementById('essayTitle').innerText;
+            const fullEssay = `${essayTitle}\n\n${essayContent}`;
+            
+            navigator.clipboard.writeText(fullEssay).then(() => {
+                alert('Essay copied to clipboard!');
+            }).catch(() => {
+                alert('Unable to copy essay. Please select and copy manually.');
+            });
+        }
+
+        function generateAnother() {
+            document.getElementById('generatedEssay').style.display = 'none';
+            document.querySelector('.generator-form').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            updateNavigation();
+            
+            // Add smooth scrolling and animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe elements for animation
+            document.querySelectorAll('.fade-in-up').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s ease-out';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
